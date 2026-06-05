@@ -1,0 +1,41 @@
+{
+  "name": "warrantyClaims_vector_index",
+  "type": "vectorSearch",
+  "fields": [
+    {
+      "type": "vector",
+      "path": "embedding",
+      "numDimensions": 1024,
+      "similarity": "cosine"
+    },
+    {
+      "type": "filter",
+      "path": "status"
+    },
+    {
+      "type": "filter",
+      "path": "vehicle.modelCode"
+    },
+    {
+      "type": "filter",
+      "path": "failure.category"
+    },
+    {
+      "type": "filter",
+      "path": "dealer.dealerId"
+    },
+    {
+      "type": "filter",
+      "path": "dealer.region"
+    },
+    {
+      "type": "filter",
+      "path": "totals.claimTotal"
+    },
+    {
+      "type": "filter",
+      "path": "sla.slaBreached"
+    }
+  ]
+}
+

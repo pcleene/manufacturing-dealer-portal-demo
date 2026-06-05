@@ -1,0 +1,128 @@
+{
+  "name": "products_search_index",
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "_id": {
+        "type": "objectId"
+      },
+      "partNumber": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "sku": {
+        "type": "string",
+        "analyzer": "lucene.keyword"
+      },
+      "name": [
+        {
+          "type": "string",
+          "analyzer": "lucene.standard"
+        },
+        {
+          "type": "autocomplete",
+          "tokenization": "edgeGram",
+          "minGrams": 3,
+          "maxGrams": 15
+        }
+      ],
+      "description": {
+        "type": "string",
+        "analyzer": "lucene.standard"
+      },
+      "category": {
+        "type": "token"
+      },
+      "subcategory": {
+        "type": "token"
+      },
+      "brand": {
+        "type": "token"
+      },
+      "compatibleModels": {
+        "type": "document",
+        "fields": {
+          "modelCode": {
+            "type": "token"
+          },
+          "modelName": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "yearStart": {
+            "type": "number"
+          },
+          "yearEnd": {
+            "type": "number"
+          }
+        }
+      },
+      "pricing": {
+        "type": "document",
+        "fields": {
+          "msrp": {
+            "type": "number"
+          },
+          "dealerPrice": {
+            "type": "number"
+          },
+          "cost": {
+            "type": "number"
+          }
+        }
+      },
+      "inventory": {
+        "type": "document",
+        "fields": {
+          "status": {
+            "type": "token"
+          },
+          "totalQuantity": {
+            "type": "number"
+          },
+          "reorderPoint": {
+            "type": "number"
+          },
+          "warehouses": {
+            "type": "document",
+            "fields": {
+              "code": {
+                "type": "token"
+              },
+              "name": {
+                "type": "string",
+                "analyzer": "lucene.standard"
+              },
+              "quantity": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "supersession": {
+        "type": "document",
+        "fields": {
+          "supersededBy": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "supersedes": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          }
+        }
+      },
+      "searchText": {
+        "type": "string",
+        "analyzer": "lucene.standard"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      }
+    }
+  }
+}

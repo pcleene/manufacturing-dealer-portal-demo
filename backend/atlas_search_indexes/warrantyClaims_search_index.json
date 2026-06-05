@@ -1,0 +1,228 @@
+{
+  "name": "warrantyClaims_search_index",
+  "mappings": {
+    "dynamic": false,
+    "fields": {
+      "_id": {
+        "type": "objectId"
+      },
+      "claimId": [
+        {
+          "type": "string",
+          "analyzer": "lucene.keyword"
+        },
+        {
+          "type": "autocomplete",
+          "tokenization": "edgeGram",
+          "minGrams": 3,
+          "maxGrams": 15
+        }
+      ],
+      "status": {
+        "type": "token"
+      },
+      "dealer": {
+        "type": "document",
+        "fields": {
+          "dealerId": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "dealerCode": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "name": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "region": {
+            "type": "token"
+          }
+        }
+      },
+      "vehicle": {
+        "type": "document",
+        "fields": {
+          "modelCode": {
+            "type": "token"
+          },
+          "modelName": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "registrationNumber": [
+            {
+              "type": "string",
+              "analyzer": "lucene.keyword"
+            },
+            {
+              "type": "autocomplete",
+              "tokenization": "edgeGram",
+              "minGrams": 2,
+              "maxGrams": 10
+            }
+          ],
+          "engineNumber": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "frameNumber": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "mileageAtClaim": {
+            "type": "number"
+          },
+          "purchaseDate": {
+            "type": "date"
+          },
+          "warrantyStartDate": {
+            "type": "date"
+          },
+          "warrantyEndDate": {
+            "type": "date"
+          }
+        }
+      },
+      "customer": {
+        "type": "document",
+        "fields": {
+          "name": [
+            {
+              "type": "string",
+              "analyzer": "lucene.standard"
+            },
+            {
+              "type": "autocomplete",
+              "tokenization": "edgeGram",
+              "minGrams": 3,
+              "maxGrams": 15
+            }
+          ],
+          "phone": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "email": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          }
+        }
+      },
+      "failure": {
+        "type": "document",
+        "fields": {
+          "category": {
+            "type": "token"
+          },
+          "description": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "technicianNotes": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "dateReported": {
+            "type": "date"
+          }
+        }
+      },
+      "partsClaimed": {
+        "type": "document",
+        "fields": {
+          "partNumber": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "partName": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "totalPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "labourClaimed": {
+        "type": "document",
+        "fields": {
+          "operationCode": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "description": {
+            "type": "string",
+            "analyzer": "lucene.standard"
+          },
+          "totalPrice": {
+            "type": "number"
+          }
+        }
+      },
+      "totals": {
+        "type": "document",
+        "fields": {
+          "partsTotal": {
+            "type": "number"
+          },
+          "labourTotal": {
+            "type": "number"
+          },
+          "claimTotal": {
+            "type": "number"
+          },
+          "approvedTotal": {
+            "type": "number"
+          }
+        }
+      },
+      "review": {
+        "type": "document",
+        "fields": {
+          "reviewedBy": {
+            "type": "string",
+            "analyzer": "lucene.keyword"
+          },
+          "decision": {
+            "type": "token"
+          },
+          "rejectionReason": {
+            "type": "token"
+          },
+          "reviewedAt": {
+            "type": "date"
+          }
+        }
+      },
+      "sla": {
+        "type": "document",
+        "fields": {
+          "slaBreached": {
+            "type": "token"
+          },
+          "dueDate": {
+            "type": "date"
+          },
+          "daysElapsed": {
+            "type": "number"
+          }
+        }
+      },
+      "searchText": {
+        "type": "string",
+        "analyzer": "lucene.standard"
+      },
+      "submittedAt": {
+        "type": "date"
+      },
+      "createdAt": {
+        "type": "date"
+      },
+      "updatedAt": {
+        "type": "date"
+      }
+    }
+  }
+}
